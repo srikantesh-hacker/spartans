@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Growth Monitoring</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background-image: url("https://png.pngtree.com/thumb_back/fh260/background/20241015/pngtree-abstract-watercolor-background-with-pastel-colors-like-light-blue-and-pink-image_16394760.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+    .bg-overlay {
+      background: rgba(255, 255, 255, 0.9);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+  <div class="bg-overlay max-w-4xl w-full rounded-xl shadow-lg p-8">
+    <h2 class="text-3xl font-bold text-center mb-6 text-blue-800">Student Growth Monitoring</h2>
+    <form method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <input class="p-3 border rounded-lg" type="text" name="name" placeholder="Student Name" required>
+      <input class="p-3 border rounded-lg" type="number" name="age" placeholder="Age (years)" required>
+      
+      <select class="p-3 border rounded-lg" name="gender" required>
+        <option value="">Select Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
+      <input class="p-3 border rounded-lg" type="number" name="sensor_height" step="0.1" placeholder="Sensor Height (cm)" required>
+      
+      <button type="submit" class="col-span-2 bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition">
+        Take Measurement
+      </button>
+    </form>
+
+   <form action="/refresh" method="POST" style="margin-top: 20px;">
+    <button type="submit" style="color:red;">Clear CSV Data</button>
+  </form>
+
+    {% if result %}
+      <div class="mt-8">
+        {% if result.error %}
+          <p class="text-red-600 text-center">{{ result.error }}</p>
+        {% else %}
+          <h3 class="text-xl font-semibold text-center mb-4 text-green-700">Measurement Result</h3>
+          <div class="overflow-x-auto">
+            <table class="w-full table-auto border border-gray-300 text-center bg-white shadow-md rounded-lg">
+              <thead class="bg-blue-100">
+                <tr>
+                  <th class="py-2 px-4 border">Name</th>
+                  <th class="py-2 px-4 border">Age</th>
+                  <th class="py-2 px-4 border">Gender</th>
+                  <th class="py-2 px-4 border">Height (cm)</th>
+                  <th class="py-2 px-4 border">Weight (kg)</th>
+                  <th class="py-2 px-4 border">BMI</th>
+                  <th class="py-2 px-4 border">Category</th>
+                  <th class="py-2 px-4 border">Calories</th>
+                  <th class="py-2 px-4 border">Time</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="py-2 px-4 border">{{ result.name }}</td>
+                  <td class="py-2 px-4 border">{{ result.age }}</td>
+                  <td class="py-2 px-4 border">{{ result.gender }}</td>
+                  <td class="py-2 px-4 border">{{ result.height }}</td>
+                  <td class="py-2 px-4 border">{{ result.weight }}</td>
+                  <td class="py-2 px-4 border">{{ result.bmi }}</td>
+                  <td class="py-2 px-4 border">{{ result.bmi_category }}</td>
+                  <td class="py-2 px-4 border">{{ result.calories }}</td>
+                  <td class="py-2 px-4 border">{{ result.timestamp }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</body>
+</html>
