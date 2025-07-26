@@ -1,5 +1,4 @@
-# spartans
-smart nutrition monitoring for children and student 
+# Spartans
 # 🥗 Smart Nutrition Monitoring System for Children and Students
 
 This project is a **Smart Nutrition Monitoring System** that helps track and analyze the nutritional status of children and students. The system uses an **ultrasonic sensor** to measure height and a **digital weight machine** for weight. It calculates **BMI (Body Mass Index)** and **daily calorie needs**, and provides a user-friendly **web interface** (built using HTML and Python) to display results and export them to **Excel**.
